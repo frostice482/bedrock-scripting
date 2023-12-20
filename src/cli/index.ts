@@ -9,3 +9,5 @@ export namespace BedrockScriptingCLI {
     export const update = cliUpdate
     export const versionSelector = cliVersionSelector
 }
+
+export default BedrockScriptingCLI
