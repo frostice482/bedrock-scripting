@@ -16,8 +16,7 @@ const bdsModules = [
 export default async function cliUpdate(cwd?: string) {
     if (cwd) process.chdir(cwd)
 
-    const manifestData = await fsp.readFile('manifest.json')
-    const manifest = new BedrockManifest(JSON.parse(manifestData))
+    const manifest = await BedrockManifest.fromFile('manifest.json')
 
     const moduleOpts: Record<string, CLIModuleVersionSelectorOptions> = Object.create(null)
     let isBds = false
