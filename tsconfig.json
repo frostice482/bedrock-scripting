@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "lib": ["esnext"],
+        "target": "esnext",
+        "module": "node16",
+        "moduleResolution": "node16",
+        "skipLibCheck": true,
+
+        "outDir": "dist",
+        "declaration": true,
+        "removeComments": true,
+        "allowJs": true,
+
+        "strict": true,
+        "noImplicitThis": true,
+        "noUncheckedIndexedAccess": true,
+        "noUnusedLocals": true,
+        "resolveJsonModule": true
+    },
+    "include": ["src"]
+}
