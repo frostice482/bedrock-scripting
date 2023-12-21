@@ -1,13 +1,8 @@
-import cliInit from "./init.js";
-import cliModuleSelector from "./module_selector.js";
-import cliUpdate from "./update.js";
-import cliVersionSelector from "./version_selector.js";
-
 export namespace BedrockScriptingCLI {
-    export const init = cliInit
-    export const moduleSelector = cliModuleSelector
-    export const update = cliUpdate
-    export const versionSelector = cliVersionSelector
+    export const init: typeof import("./init.js").default = (...args) => { return require("./init.js").default.apply(undefined, args) }
+    export const moduleSelector: typeof import("./module_selector.js").default = (...args) => { return require("./module_selector.js").default.apply(undefined, args) }
+    export const update: typeof import("./update.js").default = (...args) => { return require("./update.js").default.apply(undefined, args) }
+    export const versionSelector: typeof import("./version_selector.js").default = (...args) => { return require("./version_selector.js").default.apply(undefined, args) }
 }
 
 export default BedrockScriptingCLI
