@@ -5,14 +5,8 @@ import type * as tse from 'ts-essentials'
 import cliVersionSelector, { CLIModuleVersionSelectorObject, CLIModuleVersionSelectorOptions } from "./version_selector.js"
 import { fetchModuleVersionRanges } from "../lib/module_versions.js"
 
-export default async function cliModuleSelector(opts: tse.DeepReadonly<CLIModuleSelectorOptions> = {}) {
-    const {
-        askUseBDS = true,
-        showTable = true,
-        useBDS,
-        modules,
-        defaultModule
-    } = opts
+export default async function cliModuleSelector(opts?: tse.DeepReadonly<CLIModuleSelectorOptions> | null) {
+    const { askUseBDS = true, showTable = true, useBDS, modules, defaultModule } = opts ?? {}
 
     // common modules
     const moduleList: string[] = [

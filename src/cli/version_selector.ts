@@ -5,7 +5,7 @@ import type * as tse from 'ts-essentials'
 import { ScriptModuleVersion, ScriptModuleVersionRange } from '../lib/module_versions.js';
 import { findIndexZero } from '../lib/utils.js';
 
-export default async function cliVersionSelector(list: Iterable<CLIModuleVersionSelectorObject>, defaultOpts?: CLIModuleVersionSelectorOptionsReadonly) {
+export default async function cliVersionSelector(list: Iterable<CLIModuleVersionSelectorObject>, defaultOpts?: CLIModuleVersionSelectorOptionsReadonly | null) {
     const modulesVersions = new Map<string, ScriptModuleVersion>()
 
     let preferredMinecraftVersion: string | undefined
