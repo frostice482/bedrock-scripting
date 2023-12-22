@@ -11,13 +11,15 @@ export default async function cliVersionSelector(list: Iterable<CLIModuleVersion
     let preferredMinecraftVersion: string | undefined
 
     for (const [module, verRanges, opts = defaultOpts] of list) {
+        const { defaults = {}, text } = opts ?? {}
+
         // get module version type to be used:
         // unused, stable, or beta
         const use = await prompts({
             type: 'select',
             name: 'use',
             message: `Select module ${chalk.cyanBright(module)} version type`,
-            hint: opts?.text,
+            hint: text,
             choices: [
                 {
                     title: chalk.gray('unused'),
@@ -36,8 +38,8 @@ export default async function cliVersionSelector(list: Iterable<CLIModuleVersion
                 }
             ],
             initial: opts
-                ? opts.defaults?.use
-                    ? opts.defaults?.beta || verRanges.stable.size === 0
+                ? defaults.use
+                    ? defaults.beta || verRanges.stable.size === 0
                         ? 2
                         : 1
                     : 0
@@ -84,7 +86,7 @@ export default async function cliVersionSelector(list: Iterable<CLIModuleVersion
                 modVerListChoices,
                 ({value: range, title: ver}) => preferredMinecraftVersion
                     ? semver.satisfies(preferredMinecraftVersion, '>=' + range.min.semver + ' <=' + ('max' in range ? range.max : range.latest).semver)
-                    : opts?.defaults?.moduleVersion === ver
+                    : defaults?.moduleVersion === ver
             )
         }).then(v => v.mver as ScriptModuleVersionRange.Stable)
 
@@ -126,7 +128,7 @@ export default async function cliVersionSelector(list: Iterable<CLIModuleVersion
                 modVerChoices,
                 ({ value: { mcVersion } }) => mcVersion && (
                     preferredMinecraftVersion === mcVersion.semver
-                    || opts?.defaults?.mcVersion === mcVersion.toString()
+                    || defaults?.mcVersion === mcVersion.toString()
                 )
             )
         }).then(v => v.mcver as ScriptModuleVersion)

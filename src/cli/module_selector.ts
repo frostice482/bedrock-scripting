@@ -5,7 +5,15 @@ import type * as tse from 'ts-essentials'
 import cliVersionSelector, { CLIModuleVersionSelectorObject, CLIModuleVersionSelectorOptions } from "./version_selector.js"
 import { fetchModuleVersionRanges } from "../lib/module_versions.js"
 
-export default async function cliModuleSelector(opts?: tse.DeepReadonly<CLIModuleSelectorOptions>) {
+export default async function cliModuleSelector(opts: tse.DeepReadonly<CLIModuleSelectorOptions> = {}) {
+    const {
+        askUseBDS = true,
+        showTable = true,
+        useBDS,
+        modules,
+        defaultModule
+    } = opts
+
     // common modules
     const moduleList: string[] = [
         '@minecraft/server',
@@ -14,8 +22,8 @@ export default async function cliModuleSelector(opts?: tse.DeepReadonly<CLIModul
     ]
 
     // use bds modules
-    let useBds = opts?.useBDS
-    if (useBds === undefined || opts?.askUseBDS) {
+    let useBds = useBDS
+    if (useBds === undefined || askUseBDS) {
         useBds = await prompts({
             type: 'toggle',
             name: 'v',
@@ -38,7 +46,7 @@ export default async function cliModuleSelector(opts?: tse.DeepReadonly<CLIModul
         moduleList.map(async (module): Promise<CLIModuleVersionSelectorObject> => [
             module,
             await fetchModuleVersionRanges(module),
-            opts?.modules?.[module] ?? opts?.defaultModule
+            modules?.[module] ?? defaultModule
         ])
     )
 
@@ -46,7 +54,7 @@ export default async function cliModuleSelector(opts?: tse.DeepReadonly<CLIModul
     const versions = await cliVersionSelector(versionSelectors)
 
     // render table
-    if (opts?.showTable) {
+    if (showTable) {
         const t = new Table()
 
         t.cell('0', 'Module'           )
