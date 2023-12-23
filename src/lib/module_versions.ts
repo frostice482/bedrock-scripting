@@ -102,7 +102,7 @@ export async function fetchModuleVersionRanges(module: string): Promise<ScriptMo
             const range = stableRange.get(version)
             if (!range) {
                 const { mcVersion } = data
-                if (!mcVersion) throw null
+                if (!mcVersion) continue
 
                 stableRange.set(version, {
                     min: mcVersion,
