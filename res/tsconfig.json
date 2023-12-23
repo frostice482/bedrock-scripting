@@ -15,7 +15,8 @@
         "strict": true,
         "noImplicitThis": true,
         "noUncheckedIndexedAccess": true,
-        "noUnusedLocals": true
+        "noUnusedLocals": true,
+        "skipLibCheck": true
     },
     "include": ["entry.ts", "types.d.ts"]
 }
