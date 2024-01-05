@@ -1,10 +1,12 @@
 {
-  "name": "bedrock-scripting",
+  "name": "bedrock-scripting-cli",
   "version": "1.0.0",
   "description": "CLI Utils for Minecraft Bedrock Scripting API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "bin": "dist/cli-program.js",
+  "bin": {
+    "bedrock-scripting": "dist/cli-program.js"
+  },
   "scripts": {},
   "keywords": [
     "bedrock",
@@ -15,7 +17,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/frostice482/bedrock-scripting"
+    "url": "https://github.com/frostice482/bedrock-scripting-cli"
   },
   "devDependencies": {
     "@types/node": "^18.19.3",
