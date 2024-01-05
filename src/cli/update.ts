@@ -16,7 +16,7 @@ const bdsModules = [
 export default async function cliUpdate(cwd?: string) {
     if (cwd) process.chdir(cwd)
 
-    const manifest = await BedrockManifest.fromFile('manifest.json').catch(() => Promise.reject('manifest.json not found. Please specify [path] or cwd where the pack is located'))
+    const manifest = await BedrockManifest.fromFile('manifest.json').catch(() => Promise.reject('manifest.json not found. Please specify [dir] or cwd where the pack is located'))
 
     const moduleOpts: Record<string, CLIModuleVersionSelectorOptions> = Object.create(null)
     let isBds = false
