@@ -16,17 +16,17 @@ program
 program.command('init')
     .aliases(['i'])
     .description('Initializes Script Pack')
-    .argument('[path]', 'Specify path where the script pack will be initialized')
-    .action(async (path) => {
-        exec(await import('./cli/init.js').then(v => v.default.default), [path])
+    .argument('[dir]', 'Specify directory where the script pack will be initialized')
+    .action(async (dir) => {
+        exec(await import('./cli/init.js').then(v => v.default.default), [dir])
     })
 
 program.command('update')
     .aliases(['u'])
     .description('Updates Script API module dependencies')
-    .argument('[path]', 'Specify path where the script pack will be updated')
-    .action(async (path) => {
-        exec(await import('./cli/update.js').then(v => v.default.default), [path])
+    .argument('[dir]', 'Specify directory where the script pack will be updated')
+    .action(async (dir) => {
+        exec(await import('./cli/update.js').then(v => v.default.default), [dir])
     })
 
 program.parse()
