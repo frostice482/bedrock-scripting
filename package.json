@@ -12,10 +12,6 @@
 	"repository": "github:frostice482/bedrock-scripting",
 	"bin": "app/index.js",
 	"type": "module",
-	"scripts": {
-		"build:win": "rd /s /q app & .\\node_modules\\.bin\\tsc.cmd",
-		"build:linux": "rm -rf app && ./node_modules/.bin/tsc"
-	},
 	"files": [
 		"tsconfig.json",
 		"app"
