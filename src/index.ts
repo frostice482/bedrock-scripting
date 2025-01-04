@@ -40,6 +40,7 @@ program.command('create')
 	.alias('c')
 	.description('Creates new Bedrock Scripting addon')
 	.argument('[dir]', 'Working directoru')
+	.option('--force')
 	.option('--skip-packages', 'Skip package options')
 	.action(createExecuter('./create.js'))
 

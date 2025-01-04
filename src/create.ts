@@ -5,7 +5,12 @@ import prompts from "prompts"
 import { Manifest } from "./manifest.js"
 import { detectPackageManager, installPackages, semverRegex } from "./util.js"
 
-export default async function create({ skipPackages = false }: CreateOptions = {}) {
+export default async function create({ skipPackages = false, force }: CreateOptions = {}) {
+	if (!force) {
+		const manifestExists = await fsp.stat('manifest.json').catch(() => {})
+		if (manifestExists) throw 'manifest.json already exists! Use --force to overwrite manifest.json'
+	}
+
 	let cancel = false
     const res = await prompts([
 		{
@@ -120,4 +125,5 @@ export default async function create({ skipPackages = false }: CreateOptions = {
 
 export interface CreateOptions {
 	skipPackages?: boolean
+	force?: boolean
 }
