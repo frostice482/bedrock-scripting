@@ -23,7 +23,7 @@
 		"typescript": "^5.7.2"
 	},
 	"dependencies": {
-		"@frostice482/bedrock-scriptapi-versions": "link:..\\bedrock-scriptapi-versions",
+		"@frostice482/bedrock-scriptapi-versions": "^0.0.1",
 		"chalk": "^5.4.1",
 		"commander": "^13.0.0",
 		"prompts": "^2.4.2"
