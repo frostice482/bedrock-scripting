@@ -1,0 +1,35 @@
+{
+	"name": "@frostice482/bedrock-scripting",
+	"version": "0.0.1",
+	"description": "A command tool to create new / update existing Bedrock Scripting addon",
+	"keywords": [
+		"minecraft",
+		"bedrock",
+		"bedrock-scripting"
+	],
+	"license": "MIT",
+	"author": "frostice482",
+	"repository": "github:frostice482/bedrock-scripting",
+	"bin": "app/index.js",
+	"type": "module",
+	"scripts": {
+		"build:win": "rd /s /q app & .\\node_modules\\.bin\\tsc.cmd",
+		"build:linux": "rm -rf app && ./node_modules/.bin/tsc"
+	},
+	"files": [
+		"tsconfig.json",
+		"app"
+	],
+	"devDependencies": {
+		"@types/node": "^22.10.4",
+		"@types/prompts": "^2.4.9",
+		"esbuild": "^0.24.2",
+		"typescript": "^5.7.2"
+	},
+	"dependencies": {
+		"@frostice482/bedrock-scriptapi-versions": "link:..\\bedrock-scriptapi-versions",
+		"chalk": "^5.4.1",
+		"commander": "^13.0.0",
+		"prompts": "^2.4.2"
+	}
+}

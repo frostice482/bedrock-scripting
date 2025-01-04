@@ -1,0 +1,20 @@
+{
+	"compilerOptions": {
+		"lib": ["es2022"],
+		"target": "es2022",
+		"module": "esnext",
+
+		"moduleResolution": "node",
+		"skipLibCheck": true,
+
+		"rootDir": "src",
+		"outDir": "scripts",
+		"allowJs": true,
+
+		"strict": true,
+		"noImplicitThis": true,
+		"noUncheckedIndexedAccess": true,
+		"forceConsistentCasingInFileNames": true
+	},
+	"include": ["src"]
+}

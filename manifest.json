@@ -1,0 +1,33 @@
+{
+	"format_version": 2,
+	"header": {
+		"name": "My Addon",
+		"description": "A very cool addon",
+		"uuid": "6313d5ab-38aa-4fbb-91c8-b5732c16c3a4",
+		"version": "1.0.0",
+		"min_engine_version": [
+			1,
+			21,
+			40
+		]
+	},
+	"modules": [
+		{
+			"type": "script",
+			"uuid": "f48cbb40-7a75-4d27-bd54-86f5841d19ef",
+			"version": "1.0.0",
+			"entry": "scripts/index.js"
+		}
+	],
+	"dependencies": [
+		{
+			"module_name": "@minecraft/server",
+			"version": "1.15.0"
+		},
+		{
+			"module_name": "@minecraft/server-ui",
+			"version": "1.3.0"
+		}
+	],
+	"capabilities": []
+}
