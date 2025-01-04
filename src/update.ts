@@ -98,7 +98,10 @@ export default async function update({ to, auto }: UpdateOptions = {}) {
 				{ title: 'No, make adjustments', value: 1 },
 				{ title: 'Cancel', value: 2 },
 			]
+		}, {
+			onCancel() { cancel = true }
 		})
+		if (cancel) return
 		if (confirm === 0) break
 		if (confirm === 2) return
 
