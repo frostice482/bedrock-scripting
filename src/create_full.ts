@@ -2,6 +2,7 @@ import { PackageVersion, PackageReleaseType } from "@frostice482/bedrock-scripta
 import chalk from "chalk"
 import fs from "fs"
 import fsp from "fs/promises"
+import path from "path"
 import prompts from "prompts"
 import { packageVersionSelector, choicesConfirm, allModules } from "./util.js"
 
@@ -57,10 +58,10 @@ export default async function createFull(skipPackages = false) {
 	}
 
 	// more options
-	const { entry, useTs, installTs, useInstallEsbuild, srcFolder = 'scripts', useEval } = await prompts([
+	const { entryInput, useTs, installTs, useInstallEsbuild, srcFolder = 'scripts', useEval } = await prompts([
 		{
 			type: 'text',
-			name: 'entry',
+			name: 'entryInput',
 			message: 'Entry file (without extension)',
 			initial: 'index'
 		}, {
@@ -99,12 +100,16 @@ export default async function createFull(skipPackages = false) {
 
 	// workspace setup
 	console.log('Creating workspace')
-	const entryFile = entry + '.' + (useTs ? 'ts' : 'js')
+	const entry = path.parse(entryInput)
+	const sourceFile = entry.base + (useTs ? '.ts' : '.js')
+	const scriptEntryFile = entry.base + '.js'
+
 	const workspaceInit = await Promise.allSettled([
 		// create scripts & copy entry file
 		(async() => {
-			await fsp.mkdir(srcFolder, { recursive: true })
-			await fsp.cp(new URL('../res/entry.js', import.meta.url), srcFolder + '/' + entryFile)
+			const srcEntryDir = srcFolder + '/' + entry.dir
+			await fsp.mkdir(srcEntryDir, { recursive: true })
+			await fsp.cp(new URL('../res/entry.js', import.meta.url), srcEntryDir + '/' + sourceFile)
 
 			if (useTs) await fsp.cp(new URL('../res/types.d.ts', import.meta.url), srcFolder + '/types.d.ts')
 		})(),
@@ -124,7 +129,7 @@ export default async function createFull(skipPackages = false) {
 		useInstallEsbuild && (() => {
 			const wstr = fs.createWriteStream('build.mjs')
 			// inject src, entryFile, outFile
-			wstr.write(`var src = ${JSON.stringify(srcFolder)}, entryFile = ${JSON.stringify(entryFile)}, outFile = ${JSON.stringify(entry + '.js')};\n`)
+			wstr.write(`var src = ${JSON.stringify(srcFolder)}, entryFile = ${JSON.stringify(sourceFile)}, outFile = ${JSON.stringify(scriptEntryFile)};\n`)
 
 			const rstr = fs.createReadStream(new URL('../res/build.mjs', import.meta.url))
 			rstr.pipe(wstr)
@@ -138,7 +143,7 @@ export default async function createFull(skipPackages = false) {
 		mcVersion: mcv,
 		installTs,
 		installEsbuild: useInstallEsbuild,
-		entryFileName: entry,
+		entryFileName: scriptEntryFile,
 		useEval: useEval
 	}
 }
