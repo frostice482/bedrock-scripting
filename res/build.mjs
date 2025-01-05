@@ -14,11 +14,11 @@ for (const arg of process.argv.slice(2)) {
 		break
 		case 'm':
 		case 'minify':
-			bundle = true;
+			minify = true;
 		break
 		case 's':
 		case 'sourcemap':
-			bundle = true;
+			sourcemap = true;
 		break
 	}
 }

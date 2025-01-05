@@ -100,16 +100,14 @@ export default async function createFull(skipPackages = false) {
 
 	// workspace setup
 	console.log('Creating workspace')
-	const entry = path.parse(entryInput)
-	const sourceFile = entry.base + (useTs ? '.ts' : '.js')
-	const scriptEntryFile = entry.base + '.js'
+	const sourceFile = entryInput + (useTs ? '.ts' : '.js')
+	const scriptEntryFile = entryInput + '.js'
 
 	const workspaceInit = await Promise.allSettled([
 		// create scripts & copy entry file
 		(async() => {
-			const srcEntryDir = srcFolder + '/' + entry.dir
-			await fsp.mkdir(srcEntryDir, { recursive: true })
-			await fsp.cp(new URL('../res/entry.js', import.meta.url), srcEntryDir + '/' + sourceFile)
+			await fsp.mkdir(srcFolder + '/' + path.dirname(entryInput), { recursive: true })
+			await fsp.cp(new URL('../res/entry.js', import.meta.url), srcFolder + '/' + sourceFile)
 
 			if (useTs) await fsp.cp(new URL('../res/types.d.ts', import.meta.url), srcFolder + '/types.d.ts')
 		})(),
