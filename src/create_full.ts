@@ -105,6 +105,8 @@ export default async function createFull(skipPackages = false) {
 		(async() => {
 			await fsp.mkdir(srcFolder, { recursive: true })
 			await fsp.cp(new URL('../res/entry.js', import.meta.url), srcFolder + '/' + entryFile)
+
+			if (useTs) await fsp.cp(new URL('../res/types.d.ts', import.meta.url), srcFolder + '/types.d.ts')
 		})(),
 
 		// tsconfig
