@@ -55,7 +55,7 @@ export default async function create({ skipPackages = false, force }: CreateOpti
 		if (!full) return
 
 		moduleVersions = full.selectedVersions
-		entryFile = full.entryFileName + '.js'
+		entryFile = full.entryFileName
 		useEval = full.useEval
 		if (full.mcVersion) mcVersion = full.mcVersion
 		if (full.installTs) additionalPackages.push('typescript')
