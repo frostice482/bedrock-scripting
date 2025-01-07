@@ -69,7 +69,7 @@ export default async function update({ to, auto }: UpdateOptions = {}) {
 
 		// generate changes
 		for (const [pkg, {from, to}] of versions) {
-			if (to?.versionId === from) {
+			if (to?.type !== PackageReleaseType.Beta && to?.versionId === from) {
 				same.push(pkg)
 				continue
 			}
@@ -166,8 +166,7 @@ export default async function update({ to, auto }: UpdateOptions = {}) {
 		const uninstalls: string[] = []
 		const installs: string[] = []
 
-		for (const [pkg, { from, to }] of versions) {
-			if (from === to?.versionId) continue
+		for (const [pkg, { to }] of versions) {
 			if (to) installs.push(pkg + '@' + to.raw)
 			else uninstalls.push(pkg)
 		}
