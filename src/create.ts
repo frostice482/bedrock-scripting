@@ -94,6 +94,17 @@ export default async function create({ skipPackages = false, force }: CreateOpti
 		capabilities: useEval ? ['script_eval'] : []
 	}
 	await fsp.writeFile('manifest.json', JSON.stringify(manifest, null, '\t'))
+	await fsp.writeFile('package.json', JSON.stringify({
+		devDependencies: Object.fromEntries(Array.from(moduleVersions, ([pkg, ver]) => [pkg, (ver.type === PackageReleaseType.Stable ? '^' : '') + ver.raw])),
+		overrides: {
+			"@minecraft/server": "$@minecraft/server"
+		},
+		pnpm: {
+			overrides: {
+				"@minecraft/server": "$@minecraft/server"
+			}
+		},
+	}, null, '\t'))
 
 	// log modules to install
 	console.log(
@@ -110,7 +121,7 @@ export default async function create({ skipPackages = false, force }: CreateOpti
 	if (additionalPackages) console.log('Additional packages: ' + additionalPackages.map(v => chalk.blueBright(v)).join(', '))
 
 	// convert module versions to raw and push
-	additionalPackages.push(...Array.from(moduleVersions, ([pkg, ver]) => pkg + '@' + ver.raw))
+	//additionalPackages.push(...Array.from(moduleVersions, ([pkg, ver]) => pkg + '@' + ver.raw))
 
 	// detect package manager
 	const pacman = await detectPackageManager()
