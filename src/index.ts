@@ -34,7 +34,7 @@ function createExecuter(target: string) {
 
 program.name('bedrock-scripting')
 	.description('Create new / update existing Bedrock Scripting addon')
-	.version('0.0.2')
+	.version('0.0.3')
 
 program.command('create')
 	.alias('c')

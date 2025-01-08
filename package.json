@@ -1,6 +1,6 @@
 {
 	"name": "@frostice482/bedrock-scripting",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "A command tool to create new / update existing Bedrock Scripting addon",
 	"keywords": [
 		"minecraft",
@@ -14,7 +14,8 @@
 	"type": "module",
 	"files": [
 		"tsconfig.json",
-		"app"
+		"app",
+		"res"
 	],
 	"devDependencies": {
 		"@types/node": "^22.10.4",
