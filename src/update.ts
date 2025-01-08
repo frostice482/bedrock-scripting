@@ -166,9 +166,9 @@ export default async function update({ to, auto }: UpdateOptions = {}) {
 		const uninstalls: string[] = []
 		const installs: string[] = []
 
-		for (const [pkg, { to }] of versions) {
+		for (const [pkg, { from, to }] of versions) {
 			if (to) installs.push(pkg + '@' + to.raw)
-			else uninstalls.push(pkg)
+			else if (from) uninstalls.push(pkg)
 		}
 
 		// detect package manager
