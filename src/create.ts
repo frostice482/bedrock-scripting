@@ -97,11 +97,15 @@ export default async function create({ skipPackages = false, force }: CreateOpti
 	await fsp.writeFile('package.json', JSON.stringify({
 		devDependencies: Object.fromEntries(Array.from(moduleVersions, ([pkg, ver]) => [pkg, (ver.type === PackageReleaseType.Stable ? '^' : '') + ver.raw])),
 		overrides: {
-			"@minecraft/server": "$@minecraft/server"
+			"@minecraft/server": "$@minecraft/server",
+			"@minecraft/vanilla-data": "*",
+			"@minecraft/common": "*"
 		},
 		pnpm: {
 			overrides: {
-				"@minecraft/server": "$@minecraft/server"
+				"@minecraft/server": "$@minecraft/server",
+				"@minecraft/vanilla-data": "*",
+				"@minecraft/common": "*"
 			}
 		},
 	}, null, '\t'))
