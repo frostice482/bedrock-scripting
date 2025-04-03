@@ -10,32 +10,19 @@ pnpm i @frostice482/bedrock-scripting
 yarn add @frostice482/bedrock-scripting
 ```
 
-## Running
+## Preview
 
-- `bedrock-scripting c [dir]`: Creates new Bedrock Scripting addon.
+Create a simple scripting addon:
 
-	This command generates `manifest.json` and installs which package to use.
-	You will need to specify basic addon info, such as name, description, and version.
-	You can specify which setup mode to use:
+https://github.com/user-attachments/assets/9f9506da-db79-4236-a73a-f550725fb908
 
-	- **Simple**: You will need to select Minecraft version to use and version preferences (stable or beta) and let the program do the rest.
-	The default modules that will be installed are `@minecraft/server` and `@minecraft/server-ui`.
+Create an advanced scripting addon:
 
-	- **Advanced**: You will need to select Select Minecraft version and version preferences _individually_, specify source folder and entry file, and whether to use & install Typescript and Esbuild. This may additionally generate [build script](./res/build.mjs) (for esbuild) and [tsconfig](./res/tsconfig.json) (for typescript).
+https://github.com/user-attachments/assets/c7712c00-1de2-450b-841f-50c4610d8552
 
-	Options:
+Update a scripting addon:
 
-	- `--skip-packages` skips loading & installing `@minecraft` modules
-
-- `bedrock-scripting u [dir]`: Updates Bedrock Scripting addno.
-
-	You will need to specify next addon version and which Minecraft version to update to.
-	After that, the program will take module dependencies from `manifest.json`
-	and determines module preferences to new version (unused, stable, or beta) automatically.
-	You can also choose to adjust each module preferences.
-
-	After that, the program will update `manifest.json`'s version, min_engine_version, and dependencies to reflect newer version.
-	It will also install / uninstall `@minecraft` modules depending on preferences.
+https://github.com/user-attachments/assets/081d446d-4382-4084-9764-5fdd373b4c32
 
 ## Building
 
